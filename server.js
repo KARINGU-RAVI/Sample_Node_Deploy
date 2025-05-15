@@ -10,7 +10,7 @@ app.get('/api/',(req,res)=>{
 
 
 app.get('/',(req,res)=>{
-    res.status(200).json({message:"Hello this is from GET Home Page"});
+    res.status(200).json({message:"Hello Ravi this is from GET Home Page"});
 })
 
 app.listen(port,()=>{
