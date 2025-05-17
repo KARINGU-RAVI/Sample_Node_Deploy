@@ -1,9 +1,17 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
-const app = express();
 
+const app = express();
+app.use(cors());
+
+app.use(cors({
+    origin: '*', // or specify only your frontend origin like 'http://localhost:3000'
+    methods: ['GET', 'POST'], // allow only necessary methods
+    allowedHeaders: ['Content-Type']
+}));
 app.use(express.json());
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 // Schema
 const mongoSchema = new mongoose.Schema({
@@ -62,7 +70,7 @@ app.get("/api/user/:id", async (req,res)=>{
 app.get('/', async (req, res) => {
     try {
         const users = await userModel.find({});
-        res.json(users);
+        res.status(200).json(users);
     } catch (err) {
         console.error("Error fetching data", err);
         res.status(500).json({ message: "Error fetching data" });
